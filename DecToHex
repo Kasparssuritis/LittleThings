@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <conio.h>
+
+
+void DecToHex(int x)
+{
+    char* c;
+    int tempx = x;
+    int size = 0;
+
+    do{
+        size++;
+        tempx = tempx / 16;
+    }while(tempx > 0);
+
+    c = malloc(sizeof(char)*(size+1));
+    if(c == NULL) return;
+
+    c[size] = '\0';
+
+    for(int i = (size - 1); i >= 0; i--){
+        tempx = x % 16;
+        x = x / 16;
+        if(tempx < 10)
+            c[i] = '0' + tempx;
+        else
+            c[i] = 'A' + (tempx - 10);
+    }
+
+    printf("Hex: %s", c);
+    free(c);
+}
+
+int main()
+{
+    DecToHex(9645);
+    return 0;
+}
